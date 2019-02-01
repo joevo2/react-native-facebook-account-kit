@@ -40,6 +40,12 @@
     if (self.countryBlacklist != nil) {
         viewController.blacklistedCountryCodes = self.countryBlacklist;
     }
+    if (self.facebookNotificationsEnabled == YES) {
+        viewController.enableSendToFacebook = self.facebookNotificationsEnabled;
+    }
+    if (self.getACallEnabled == YES) {
+        viewController.enableGetACall = self.getACallEnabled;
+    }
     viewController.defaultCountryCode = self.defaultCountry;
 
 }
@@ -58,7 +64,12 @@
         UIViewController<AKFViewController> *viewController = [_accountKit viewControllerForPhoneLoginWithPhoneNumber:prefillPhoneNumber state:inputState];
         [self _prepareLoginViewController:viewController];
         UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-        [rootViewController presentViewController:viewController animated:YES completion:NULL];
+        
+        if([_viewControllerMode isEqualToString:@"present"]) {
+          [rootViewController presentViewController:viewController animated:YES completion:nil];
+        } else if ([_viewControllerMode isEqualToString:@"show"]) {
+          [rootViewController showViewController:viewController sender:nil];
+        }
     });
 }
 
@@ -74,7 +85,12 @@
         UIViewController<AKFViewController> *viewController = [_accountKit viewControllerForEmailLoginWithEmail:prefillEmail state:inputState];
         [self _prepareLoginViewController:viewController];
         UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-        [rootViewController presentViewController:viewController animated:YES completion:NULL];
+        
+        if([_viewControllerMode isEqualToString:@"present"]) {
+          [rootViewController presentViewController:viewController animated:YES completion:nil];
+        } else if ([_viewControllerMode isEqualToString:@"show"]) {
+          [rootViewController showViewController:viewController sender:nil];
+        }
     });
 }
 

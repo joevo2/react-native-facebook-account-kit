@@ -338,9 +338,13 @@ RNAccountKit.configure({
   countryWhitelist: ['AR'], // [] by default
   countryBlacklist: ['US'], // [] by default
   defaultCountry: 'AR',
-  theme: {...} // for iOS only, see the Theme section
+  theme: {...}, // for iOS only, see the Theme section
+  viewControllerMode: 'show'|'present' // for iOS only, 'present' by default
+  getACallEnabled: true|false
 })
 ```
+
+[@MahbbRah](https://github.com/MahbbRah) put together a [video tutorial](https://youtu.be/R-HSmuVHkIM) of how to integrate the library you might find useful.
 
 ## Examples
 
@@ -367,7 +371,7 @@ If you have trouble running any example try the following:
     ```diff
     -    "react-native-facebook-account-kit": "file:../.."
     ```
-3.  Run <code>yarn react-native-facebook-account-kit</code>
+3.  Run <code>yarn add react-native-facebook-account-kit</code>
 
 4.  Re-run <code>react-native run-android</code> or <code>react-native run-ios</code>
 
@@ -390,6 +394,23 @@ RNAccountKit.configure({
 ```
 
 Issue: [#68](https://github.com/underscopeio/react-native-facebook-account-kit/issues/68)
+
+</details>
+
+<details>
+    <summary>iOS only: Login screen doesn't show up</summary>
+<br/>
+
+In some cases, if you implement the Login button in a presented Modal screen, you need to add `viewControllerMode: 'show'` into the configuration.
+
+```javascript
+// Configures the SDK with some options
+RNAccountKit.configure({
+    viewControllerMode: 'show'
+    ...
+})
+```
+Issue: [#167](https://github.com/underscopeio/react-native-facebook-account-kit/issues/167)
 
 </details>
 
